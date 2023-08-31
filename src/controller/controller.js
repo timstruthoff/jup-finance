@@ -12,8 +12,9 @@ export default class Controller {
 
     async startApp() {
         await this.model.start();
-        await this.model.executeTestCommands();
+        this.plaid.attachModel(this.model);
         await this.plaid.run();
+        await this.model.getLast20Transactions();
         await this.shutdown();
     }
 

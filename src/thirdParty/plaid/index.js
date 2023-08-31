@@ -3,10 +3,16 @@ import { stringify } from 'csv-stringify/sync';
 import * as fs from 'fs';
 
 export default class Plaid {
+
+    model;
     constructor() {
         console.log("Plaid")
 
         
+    }
+
+    attachModel(model) {
+      this.model = model;
     }
 
     async run() {
@@ -72,6 +78,25 @@ export default class Plaid {
           });
           
           fs.writeFileSync("./temp-files/transactions.csv", output)
+
+          // Add Promises to DB
+          const addTransactionsPromises = [];
+
+          added.forEach(transaction => {
+            addTransactionsPromises.push(
+              this.model.createTransaction(
+                transaction.amount, 
+                transaction.datetime, 
+                transaction.name,
+                transaction.account_id,
+                transaction.category[0],
+                transaction.iso_currency_code,
+                transaction.transaction_id
+              )
+            );
+          })
+
+          const result = await Promise.all(addTransactionsPromises)
           
           console.log("Finished")
     }
