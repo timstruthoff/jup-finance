@@ -51,13 +51,25 @@ export default class Model {
 
         await this.databaseConnection.execute(`CREATE TABLE IF NOT EXISTS plaid_transactions (
             id MEDIUMINT NOT NULL AUTO_INCREMENT,
-            transaction_id MEDIUMINT,
-            plaid_account_id MEDIUMTEXT,
-            plaid_category MEDIUMTEXT,
-            plaid_currency MEDIUMTEXT,
-            plaid_transaction_id MEDIUMTEXT,
-            PRIMARY KEY (id),
-            FOREIGN KEY (transaction_id) REFERENCES transactions(id)
+            plaid_transaction_id TEXT,
+            account_id TEXT,
+            amount DOUBLE,
+            authorized_datetime DATETIME,
+            category TEXT,
+            datetime DATETIME,
+            iso_currency_code TEXT,
+            name TEXT,
+            payment_channel TEXT,
+            personal_finance_category TEXT,
+            PRIMARY KEY (id)
+        )`)
+
+        await this.databaseConnection.execute(`CREATE TABLE IF NOT EXISTS transactions_plaid_transactions_relation (
+            transaction_id MEDIUMINT NOT NULL,
+            plaid_transaction_id MEDIUMINT NOT NULL,
+            PRIMARY KEY (transaction_id, plaid_transaction_id),
+            FOREIGN KEY (transaction_id) REFERENCES transactions(id),
+            FOREIGN KEY (plaid_transaction_id) REFERENCES plaid_transactions(id)
         )`)
     }
 
@@ -65,6 +77,48 @@ export default class Model {
         const [results, fields] = await this.databaseConnection.execute(
             'INSERT INTO transactions (description, amount, datetime, debit_account_id, credit_account_id) VALUES (?, ?, ?, ?, ?)',
             [description, amount, datetime, debit_account_id, credit_account_id]
+        )
+
+        return results;
+    }
+
+    async createPlaidTransaction({
+        transactionId, 
+        accountId, 
+        amount, 
+        authorizedDatetime, 
+        category, 
+        datetime, 
+        isoCurrencyCode, 
+        name, 
+        paymentChannel, 
+        personalFinanceCategory
+    }) {
+        const [results, fields] = await this.databaseConnection.execute(
+            `INSERT INTO plaid_transactions (
+                plaid_transaction_id,
+                account_id,
+                amount,
+                authorized_datetime,
+                category,
+                datetime,
+                iso_currency_code,
+                name,
+                payment_channel,
+                personal_finance_category
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                transactionId, 
+                accountId, 
+                amount, 
+                authorizedDatetime, 
+                category, 
+                datetime, 
+                isoCurrencyCode, 
+                name, 
+                paymentChannel, 
+                personalFinanceCategory
+            ]
         )
 
         return results;
