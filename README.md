@@ -2,6 +2,9 @@
 
 This app attempts to implement the [double-entry bookkeeping system](https://en.wikipedia.org/wiki/Double-entry_bookkeeping) using a relational data model.
 
+## Goals
+- Keep the data readable; I want to be able to analyse the SQL tables using simple tools like Excel, so I try to minimise complexity in the database schema.
+
 ## Limitations
 - No split-entries; It is not possible for one debit to go to multiple credits or vice versa. This limitation can be circumvented by using separate entries on both sides.
 
