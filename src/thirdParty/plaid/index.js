@@ -83,18 +83,28 @@ export default class Plaid {
           const addTransactionsPromises = [];
 
           added.forEach(transaction => {
+            const datetimeInMySQLFormat = transaction.datetime.slice(0, 19).replace('T', ' ')
             addTransactionsPromises.push(
-              this.model.createTransaction(
-                transaction.amount, 
-                transaction.datetime, 
-                transaction.name,
-                transaction.account_id,
-                transaction.category[0],
-                transaction.iso_currency_code,
-                transaction.transaction_id
-              )
+              this.model.createTransaction({
+                description: transaction.name, 
+                amount: transaction.amount, 
+                datetime: datetimeInMySQLFormat,
+                debit_account_id: 1, 
+                credit_account_id: 1
+              })
             );
+
+            /*
+            transaction.amount, 
+            transaction.datetime, 
+            transaction.name,
+            transaction.account_id,
+            transaction.category[0],
+            transaction.iso_currency_code,
+            transaction.transaction_id*/
           })
+
+          setTimeout(() => {}, 100000)
 
           const result = await Promise.all(addTransactionsPromises)
           

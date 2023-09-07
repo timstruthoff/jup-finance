@@ -2,6 +2,13 @@
 
 This app attempts to implement the [double-entry bookkeeping system](https://en.wikipedia.org/wiki/Double-entry_bookkeeping) using a relational data model.
 
+## Getting started
+
+Start the MySQL Docker instance
+```
+docker run --name jup-finance-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8
+```
+
 ## Goals
 - Keep the data readable; I want to be able to analyze the SQL tables using simple tools like Excel, so I try to minimize complexity in the database schema.
 
