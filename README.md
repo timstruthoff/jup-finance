@@ -1,9 +1,18 @@
 # jup-finance
 
-This app attempts to be an implementation of the [double-entry bookkeeping system](https://en.wikipedia.org/wiki/Double-entry_bookkeeping).
+This app attempts to implement the [double-entry bookkeeping system](https://en.wikipedia.org/wiki/Double-entry_bookkeeping) using a relational data model.
+
+## Limitations
+- No split-entries; It is not possible for one debit to go to multiple credits or vice versa. This limitation can be circumvented by using separate entries on both sides.
+
+## Sources
+- Great Stack Overflow Answer about implementing Double-Entry bookkeepng in relational data models: [Link](https://stackoverflow.com/questions/59432964/relational-data-model-for-double-entry-accounting)
+- https://gist.github.com/NYKevin/9433376
+
 
 ## Better alternatives
 
 - https://beancount.github.io/fava/
 - https://beancount.github.io/
 - https://github.com/flash-oss/medici
+- And [many more](https://github.com/search?q=double+entry&type=repositories)...
