@@ -6,14 +6,19 @@ This application is supposed to simulate buying and selling stocks.
 
 ## Install the neccessary modules
 
+- pip install flask
+- pip install python-dotenv
+- pip install Flask-SQLAlchemy
+- pip install flask-migrate
+- pip install mysql-connector-python
+
 - Install python
 - pip install bs4
 - pip install lxml
-- pip install flask
-- pip install Flask-SQLAlchemy
+
+- 
 - pip install bcrypt
-- pip install flask-migrate
-- pip install python-dotenv
+- 
 
 ## Start the application
 
