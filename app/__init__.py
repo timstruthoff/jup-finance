@@ -14,7 +14,9 @@ app.config.from_object(Config)
 app.json_encoder = DateJSONEncoder
 
 # Create an instance of SQLAlchemy used throughout the.
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options= {
+    "expire_on_commit": False
+})
 
 # SQLAlchemy Migrate is used to handle changes to a persisting database.
 # It automatically writes a protocol of every change in the structure

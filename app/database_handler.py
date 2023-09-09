@@ -44,7 +44,6 @@ class DatabaseHandler:
             stock = Stock(company_name = company_name, current_value = current_value)
             db.session.add(stock)
             db.session.commit()
-            db.session.expunge(stock)
             return stock
 
     def get_stock(self, wkn):
