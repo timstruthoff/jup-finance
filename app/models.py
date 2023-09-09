@@ -11,12 +11,10 @@ def generateUUID():
 
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key = True, nullable = False)
-    amount = db.Column(db.Integer(), nullable = False)
-    type = db.Column(db.Text(), nullable = False)
+    amount = db.Column(db.Numeric, nullable = False)
+    name = db.Column(db.Text(), nullable = False)
     timestamp = db.Column(db.DateTime(), nullable = False, default = datetime.utcnow)
     stock_id = db.Column(db.Integer, db.ForeignKey('stock.id'))
-    value = db.Column(db.Numeric, nullable = False)
-    user_balance = db.Column(db.Numeric, nullable = False)
 
     def __repr__(self):
         return '<Transaction {}>'.format(self.id)

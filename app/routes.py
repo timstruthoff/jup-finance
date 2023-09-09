@@ -1,8 +1,12 @@
-from flask import render_template, url_for, request, redirect, make_response
+from flask import request
 from app import app
 from flask import jsonify
+from app.schema import TransactionSchema, StockSchema
 
 from app import dbHandler
+
+transactionSchema = TransactionSchema()
+stockSchema = StockSchema()
 
 @app.route("/stock", methods = ["POST"])
 def add_stock():
@@ -21,7 +25,7 @@ def add_stock():
         stock = dbHandler.add_stock(company_name, current_value)
 
         
-        return jsonify(stock)
+        return jsonify(stockSchema.dump(stock))
     
     return jsonify(error)
 
