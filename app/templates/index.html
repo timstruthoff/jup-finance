@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Stock Exchange Deppentreff</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+<body>
+
+    </div>
+    </header>
+        <!-- Class with Message is created, this will always display Hello-->
+        <div class='message'>
+            <p>Hello !</p>
+            <!-- To Display Message, can be an Error or Success Message-->
+            {% if message != none %}
+                <div class="{{message['type']}}">{{ message["text"]}}</div>
+            {% endif %}
+        </div>
+    <!--class which will be used to get the input of the user-->
+    <div class="loginbox">
+        <h1>Welcome to Deppentreff!</h1>
+        <!-- to link the login with the register page and allow the user to create an account-->
+        <span class="psw">Don't have an account yet? <a href="{{ url_for('register') }}">Sign up!</a></span> 
+       
+        <p></p>
+        <!--we want send the data via an http-Request in this case a POST-Request-->
+        <form  method="post" action = "{{ url_for('index') }}">
+            
+            <label for="email"><b>E-Mail</b></label>
+            <!-- to get the input of the user-->
+            <input type="email" name="email" placeholder="Enter your e-mail " required >
+            <p></p>
+            <label for="password"><b>Password</b></label>
+            <!-- to get the input of the user-->
+            <input type="password" name="password" placeholder="Enter your password"  required>
+        <!--Button to submit the input Datat-->
+        <input type="submit" name="" value="submit">
+           
+        </form>
+        
+    </div>
+
+    <!-- the most important class which is neccessary to display the llama on the website-->
+    <div class='llamaLogin'>
+        <img src="../static/images/llama.png" alt="Llama">
+    </div>
+</body>
+</head>
+</html>

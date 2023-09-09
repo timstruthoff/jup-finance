@@ -1,0 +1,2 @@
+FLASK_APP=stocksapp.py
+DATABASE_URL=
