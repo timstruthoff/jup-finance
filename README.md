@@ -2,6 +2,10 @@
 
 This app attempts to implement the [double-entry bookkeeping system](https://en.wikipedia.org/wiki/Double-entry_bookkeeping) using a relational data model.
 
+## Disclaimer
+- This is strictly a **work in progress**. Comments and documentation are incomplete and it's barely a prove of concept.
+- I am currently using the (pretty awesesome) [YNAB](https://www.ynab.com/) app for keeping track of expenses but once I have enough free time again I am going to continue this project.
+
 ## Getting started
 
 Start the MySQL Docker instance
