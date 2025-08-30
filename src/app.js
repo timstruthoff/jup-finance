@@ -19,7 +19,9 @@ export default class JupServer {
         this.view = new View();
         this.plaid = new Plaid();
 
-        this.controller = new Controller(this.model, this.view, this.plaid);
-        this.controller.startApp();
+        // this.controller = new Controller(this.model, this.view, this.plaid);
+        // this.controller.startApp();
+        this.plaid.run()
+        setTimeout(() => {}, 1000000)
     }
 }
